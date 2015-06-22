@@ -51,6 +51,11 @@ namespace Owin
 
             var appDisposing = builder.Properties[AppDisposingKey] as CancellationToken?;
 
+            if (nancyOptions.Bootstrapper == null)
+            {
+                return;
+            }
+
             if (appDisposing.HasValue)
             {
                 appDisposing.Value.Register(nancyOptions.Bootstrapper.Dispose);

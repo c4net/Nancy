@@ -31,6 +31,8 @@ namespace Nancy
                 asm => asm.FullName.StartsWith("xunit", StringComparison.InvariantCulture),
                 asm => asm.FullName.StartsWith("Nancy.Testing", StringComparison.InvariantCulture),
                 asm => asm.FullName.StartsWith("MonoDevelop.NUnit", StringComparison.InvariantCulture),
+                asm => asm.FullName.StartsWith("Mono", StringComparison.InvariantCulture),
+                asm => asm.FullName.StartsWith("Xamarin", StringComparison.InvariantCulture),
                 asm => asm.FullName.StartsWith("SMDiagnostics", StringComparison.InvariantCulture),
                 asm => asm.FullName.StartsWith("CppCodeProvider", StringComparison.InvariantCulture),
                 asm => asm.FullName.StartsWith("WebDev.WebHost40", StringComparison.InvariantCulture),

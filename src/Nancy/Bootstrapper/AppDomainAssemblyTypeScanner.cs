@@ -329,18 +329,29 @@ namespace Nancy.Bootstrapper
                                                 ? new string[] { }
                                                 : AppDomain.CurrentDomain.SetupInformation.PrivateBinPath.Split(';');
 
+            var dirs = new List<string>();
+
             foreach (var privateBinPathDirectory in privateBinPathDirectories)
             {
-                if (!string.IsNullOrWhiteSpace(privateBinPathDirectory))
+                if (string.IsNullOrWhiteSpace(privateBinPathDirectory))
                 {
-                    yield return privateBinPathDirectory;
+                    continue;
                 }
+
+                dirs.Add(privateBinPathDirectory);
             }
 
-            if (AppDomain.CurrentDomain.SetupInformation.PrivateBinPathProbe == null)
+            if (dirs.Any())
             {
-                yield return AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                return dirs;
             }
+
+            if (string.IsNullOrEmpty(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) == false)
+            {
+                dirs.Add(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            }
+
+            return dirs;
         }
 
         private static IEnumerable<string> GetNormalisedAssemblyNames(string[] assemblyNames)

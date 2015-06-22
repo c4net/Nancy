@@ -3171,6 +3171,8 @@ namespace Nancy.TinyIoc
             // TODO - find a better way to remove "system" types from the auto registration
             var ignoreChecks = new List<Func<Type, bool>>()
             {
+                t => t.FullName.StartsWith("Mono.", StringComparison.Ordinal),
+                t => t.FullName.StartsWith("Xamarin.", StringComparison.Ordinal),
                 t => t.FullName.StartsWith("System.", StringComparison.Ordinal),
                 t => t.FullName.StartsWith("Microsoft.", StringComparison.Ordinal),
                 t => t.IsPrimitive(),
